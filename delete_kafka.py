@@ -1,7 +1,7 @@
 import sys
 from kafka import KafkaAdminClient
 
-def example_delete_topics(a, topics):
+def delete_topics(a, topics):
     """ delete topics """
 
     # Call delete_topics to asynchronously delete topics, a future is returned.
@@ -10,23 +10,26 @@ def example_delete_topics(a, topics):
     # to propagate in the cluster before returning.
     #
     # Returns a dict of <topic,future>.
-    fs = a.delete_topics(topics, operation_timeout=30)
+    fs = a.delete_topics(topics)
 
     # Wait for operation to finish.
-    for topic, f in fs.items():
+    for topic, f in fs:
         try:
             f.result()  # The result itself is None
             print("Topic {} deleted".format(topic))
         except Exception as e:
             print("Failed to delete topic {}: {}".format(topic, e))
 
-def main():
+def main(fname):
     admin_client = KafkaAdminClient(bootstrap_servers=['localhost:9092'])
 
-    fname = sys.argv[1]
     topics = []
-
     with open(fname, 'r') as fp:
         topics = fp.read().splitlines()
 
     delete_topics(admin_client, topics) 
+
+if __name__ == '__main__':
+
+    fname = sys.argv[1]
+    main(fname)
