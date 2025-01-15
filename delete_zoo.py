@@ -6,8 +6,8 @@ def delete_topics(topics):
 
     for topic in topics:
         print(f'Deleting {topic}')
-        os.system(f'zookeeper-shell localhost:2181 deleteall /brokers/topics/{topic}')
-        os.system(f'zookeeper-shell localhost:2181 deleteall /admin/delete_topics/{topic}')
+        os.system(f'zookeeper-shell kafka1.storage.iijlab.net:2181 deleteall /brokers/topics/{topic}')
+        os.system(f'zookeeper-shell kafka1.storage.iijlab.net:2181 deleteall /admin/delete_topics/{topic}')
 
 def main(fname):
 

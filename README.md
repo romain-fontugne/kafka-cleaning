@@ -34,5 +34,5 @@ python3 delete_zoo.py topics.txt
 ### Delete topics on disk
 
 ```bash
-python3 delte_disk.py username topics.txt
+python3 delete_disk.py username topics.txt
 ```
