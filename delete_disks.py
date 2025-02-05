@@ -28,7 +28,7 @@ def key_based_connect(server, user):
 
 def main():
     user = sys.argv[1] 
-    server_list = ["kafka1", "kafka2", "kafka3", "kafka4"]
+    server_list = ["kafka1.storage.iijlab.net", "kafka2.storage.iijlab.net", "kafka5.storage.iijlab.net", "kafka6.storage.iijlab.net"]
 
     fname = sys.argv[2]
     topics = []

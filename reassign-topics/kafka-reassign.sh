@@ -1,7 +1,7 @@
 #!/bin/bash
 set +xoe pipefail
 
-export BOOTSTRAP_SERVER = kafka1.storage.iijlab.net,kafka2.storage.iijlab.net,kafka6.storage.iijlab.net
+export BOOTSTRAP_SERVER=kafka5.storage.iijlab.net:9092
 
 #########################################################################################
 # 
@@ -39,7 +39,7 @@ do
   kafka-reassign-partitions --bootstrap-server ${BOOTSTRAP_SERVER} --topics-to-move-json-file $output_dir/topics.json --broker-list "101,102,105,106"  --generate  | awk '/Proposed partition reassignment configuration/{c=NR+2}(NR<=c){print}' | awk NR\>1 > $output_dir/reassign.json 
   
   echo -e "\nExecuting reassignment"
-  kafka-reassign-partitions --bootstrap-server ${BOOTSTRAP_SERVER}  --reassignment-json-file $output_dir/reassign.json  --execute 
+  kafka-reassign-partitions --bootstrap-server ${BOOTSTRAP_SERVER}  --reassignment-json-file $output_dir/reassign.json  --execute  --additional --throttle 20000000
   
   echo -e "\nVerifying reassignment"
   kafka-reassign-partitions --bootstrap-server ${BOOTSTRAP_SERVER}  --reassignment-json-file $output_dir/reassign.json  --verify 

@@ -21,7 +21,7 @@ def delete_topics(a, topics):
             print("Failed to delete topic {}: {}".format(topic, e))
 
 def main(fname):
-    admin_client = KafkaAdminClient(bootstrap_servers=['localhost:9092'])
+    admin_client = KafkaAdminClient(bootstrap_servers=['kafka1.storage.iijlab.net:9092'])
 
     topics = []
     with open(fname, 'r') as fp:
